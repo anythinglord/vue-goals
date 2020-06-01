@@ -1,1 +1,2 @@
-# vue-goals
+# Activity Planner
+# Vue Js
