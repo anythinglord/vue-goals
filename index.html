@@ -31,7 +31,11 @@
                 </div>
             </div>
             </nav>
-            <h1>{{message}}</h1>
+
+            <div v-if="isTestDisplayed">
+                <h1 v-bind:title="titleMessage">{{message}}</h1>
+            </div>
+            
             <section class="container">
             <div class="columns">
                 <div class="column is-3">
@@ -85,13 +89,6 @@
             </section>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script>
-            var app = new Vue({
-                el: '#vueGoalApp',
-                data:{
-                    message: 'Hello Vue!'
-                }
-            })
-        </script>
+        <script src="index.js"></script>
     </body>
 </html>
