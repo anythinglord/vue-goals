@@ -4,6 +4,10 @@ var app = new Vue({
         message: 'Hello Vue!',
         titleMessage: 'Title Message Vue!!!!!',
         isTestDisplayed: true,
+        isFormDisplayed: false,
+        newActivity:{
+            title: ''
+        },
         items: {
             1:{name: 'Filip', old:18},
             2:{name: 'Clara', old:19},
@@ -13,7 +17,7 @@ var app = new Vue({
             name: 'Pepito perez',
             id: '-Aj34jknvncx98812',
         },
-        goals: {
+        activities: {
             '1546968934': {
                 id: '1546968934',
                 title: 'Learn Vue.js',
@@ -41,6 +45,9 @@ var app = new Vue({
     methods:{
         toogleTextDisplay(){
             this.isTestDisplayed = !this.isTestDisplayed
+        },
+        displayForm(){
+            this.isFormDisplayed = !this.isFormDisplayed
         }
     }
 })

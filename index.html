@@ -54,13 +54,29 @@
 
                 <div class="columns">
                     <div class="column is-3">
-                        <a class="button is-primary is-block is-alt is-large" href="#">New Activity</a>
+                        <a @click='displayForm' class="button is-primary is-block is-alt is-large" href="#">New Activity</a>
+                        <div v-if="isFormDisplayed" class="create-form">
+                            <h2>Create Activity</h2>
+                            <form>
+                                <div class="field">
+                                    <label class="label">Title</label>
+                                    <div class="control">
+                                        <input v-model="newActivity.title" class="input" type="text" placeholder="Read a Book">
+                                    </div>
+                                </div>
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button  class="button is-link">Create Activity</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> 
                     </div>
                 <div class="column is-9">
 
                 <div class="box content">
-                    <article class="post" v-for=" goal in goals ">
-                        <h4>{{goal.title}}</h4>
+                    <article class="post" v-for=" activity in activities ">
+                        <h4>{{activity.title}}</h4>
                         <div class="media">
                             <div class="media-left">
                                 <p class="image is-32x32">
@@ -70,12 +86,12 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                    <a href="#">{{user.name}}</a> updated {{goal.updatedAt}} minutes ago &nbsp;
+                                    <a href="#">{{user.name}}</a> updated {{activity.updatedAt}} minutes ago &nbsp;
                                     </p>
                                 </div>
                             </div>
                             <div class="media-right">
-                                <span>{{goal.progress}}</span>
+                                <span>{{activity.progress}}</span>
                             </div>
                         </div>
                     </article>
