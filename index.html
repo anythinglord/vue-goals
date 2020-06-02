@@ -32,56 +32,52 @@
             </div>
             </nav>
 
-            <div v-if="isTestDisplayed">
-                <h1 v-bind:title="titleMessage">{{message}}</h1>
-            </div>
             
+
             <section class="container">
-            <div class="columns">
-                <div class="column is-3">
-                <a class="button is-primary is-block is-alt is-large" href="#">New Activity</a>
-                </div>
+
+                <!-- div class="example-wrapper">
+                    <div v-if="isTestDisplayed">
+                        <h1 v-bind:title="titleMessage">{{message}}</h1>
+                    </div>
+                    <div v-else>
+                        Hidden Message
+                    </div>
+                    
+                    <div v-for="item in items"> 
+                        <h2>{{item.name}}</h2>
+                        <div>{{item.old}}</div>
+                    </div>
+                    <button @click='toogleTextDisplay'>Hide Message</button>
+                </div -->
+                
+
+                <div class="columns">
+                    <div class="column is-3">
+                        <a class="button is-primary is-block is-alt is-large" href="#">New Activity</a>
+                    </div>
                 <div class="column is-9">
+
                 <div class="box content">
-                    <article class="post">
-                    <h4>Reading Harry Potter</h4>
-                    <div class="media">
-                        <div class="media-left">
-                        <p class="image is-32x32">
-                            <img src="./images/user.png">
-                        </p>
+                    <article class="post" v-for=" goal in goals ">
+                        <h4>{{goal.title}}</h4>
+                        <div class="media">
+                            <div class="media-left">
+                                <p class="image is-32x32">
+                                    <img src="./images/user.png">
+                                </p>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                    <a href="#">{{user.name}}</a> updated {{goal.updatedAt}} minutes ago &nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="media-right">
+                                <span>{{goal.progress}}</span>
+                            </div>
                         </div>
-                        <div class="media-content">
-                        <div class="content">
-                            <p>
-                            <a href="#">Filip Jerga</a> updated 34 minutes ago &nbsp;
-                            </p>
-                        </div>
-                        </div>
-                        <div class="media-right">
-                        <span>Progress Bar Here</span>
-                        </div>
-                    </div>
-                    </article>
-                    <article class="post">
-                    <h4>Learn Vue.js</h4>
-                    <div class="media">
-                        <div class="media-left">
-                        <p class="image is-32x32">
-                            <img src="./images/user.png">
-                        </p>
-                        </div>
-                        <div class="media-content">
-                        <div class="content">
-                            <p>
-                            <a href="#">Filip Jerga</a> updated 40 minutes ago &nbsp;
-                            </p>
-                        </div>
-                        </div>
-                        <div class="media-right">
-                        <span>Progress Bar Here</span>
-                        </div>
-                    </div>
                     </article>
                 </div>
                 </div>
