@@ -6,7 +6,8 @@ var app = new Vue({
         isTestDisplayed: true,
         isFormDisplayed: false,
         newActivity:{
-            title: ''
+            title: '',
+            notes: ''
         },
         items: {
             1:{name: 'Filip', old:18},
@@ -48,6 +49,9 @@ var app = new Vue({
         },
         displayForm(){
             this.isFormDisplayed = !this.isFormDisplayed
+        },
+        createActivity(){
+            console.log(this.newActivity)
         }
     }
 })
