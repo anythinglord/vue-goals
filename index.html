@@ -71,36 +71,25 @@
                                 </div>
                             </form>
                         </div> 
-                    </div>
-                <div class="column is-9">
-
-                <div class="box content">
-                    <article class="post" v-for=" activity in activities ">
-                        <h4>{{activity.title}}</h4>
-                        <div class="media">
-                            <div class="media-left">
-                                <p class="image is-32x32">
-                                    <img src="./images/user.png">
-                                </p>
-                            </div>
-                            <div class="media-content">
-                                <div class="content">
-                                    <p>
-                                    <a href="#">{{user.name}}</a> updated {{activity.updatedAt}} minutes ago &nbsp;
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="media-right">
-                                <span>{{activity.progress}}</span>
-                            </div>
+                    </div>  
+                     
+                    
+                    <div class="column is-9">
+                        <div class="box content">
+                            <activity-item 
+                                v-for="activity in activities" 
+                                v-bind:activity="activity"
+                                v-bind:key="activity.id">
+                            </activity-item> 
                         </div>
-                    </article>
+                    </div>
                 </div>
-                </div>
-            </div>
             </section>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="./components/ActivityItem.js"></script>
         <script src="index.js"></script>
+        
+        
     </body>
 </html>
