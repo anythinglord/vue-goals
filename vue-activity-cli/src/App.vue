@@ -3,7 +3,7 @@
 		<nav class="navbar is-white topNav">
 		<div class="container">
 			<div class="navbar-brand">
-			<h1>Activity Planner</h1>
+			<h1>{{ fullAppName }}</h1>
 			</div>
 		</div>
 		</nav>
@@ -34,12 +34,32 @@
 							<div class="field">
 								<label class="label">Notes</label>
 								<div class="control">
+									<select v-model="newActivity.category" class="select">
+										<option disabled value="">Please select one</option>
+										<option 
+											v-for="category in categories" 
+											v-bind:key="category.id">
+											{{ category.text }}
+										</option>	
+									</select>
+								</div>
+							</div>
+
+							<div class="field">
+								<label class="label">Notes</label>
+								<div class="control">
 									<textarea v-model="newActivity.notes" class="textarea" placeholder="Write some notes here!"></textarea>
 								</div>
 							</div>
+
 							<div class="field is-grouped">
 								<div class="control">
-									<button class="button is-link" @click='createActivity'>Create Activity</button>
+									<button 
+										class="button is-link" 
+										v-bind:disabled='!isFormValid()' 	 	
+										@click='createActivity'>
+										Create Activity
+									</button>
 								</div>
 								<div class="control">
 									<button class="button is-text" @click='displayForm'>Cancel Activity</button>
@@ -55,6 +75,8 @@
 							v-bind:activity="activity"
 							v-bind:key="activity.id">
 						</ActivityItem>
+						<div class="activity-length">Currently {{ activityLength }} activities</div>
+						<div class="activity-motivation">{{ activityMotivation }}</div>
 					</div>
 				</div>
 			</div>
@@ -65,6 +87,7 @@
 
 <script>
 	import ActivityItem from './components/ActivityItem'
+	import { fetchActivities, fetchUser, fetchCategories } from './api/index'
 	export default{
 		name: 'app',
 		components: {
@@ -72,10 +95,9 @@
 		},
 		data() {
 			return {
-				message: 'Hello Vue!',
-				titleMessage: 'Title Message Vue!!!!!',
-				isTestDisplayed: true,
 				isFormDisplayed: false,
+				creator: 'Any More',
+				appName: 'ActivityPlanner',
 				newActivity:{
 					title: '',
 					notes: ''
@@ -85,45 +107,66 @@
 					2:{name: 'Clara', old:19},
 					3:{name: 'Klark', old:18},
 				},
-				user: {
-					name: 'Pepito perez',
-					id: '-Aj34jknvncx98812',
-				},
-				activities: {
-					'1546968934': {
-						id: '1546968934',
-						title: 'Learn Vue.js',
-						notes: 'I started today and it was not good.',
-						progress: 0,
-						category: '1546969049',
-						createdAt: 1546969144391,
-						updatedAt: 1546969144391
-					},
-					'1546969212': {
-						id: '1546969212',
-						title: 'Read Witcher Books',
-						notes: 'These books are super nice',
-						progress: 0,
-						category: '1546969049',
-						createdAt: 1546969144391,
-						updatedAt: 1546969144391
-					}
-				},
-				categories: {
-					'1546969049': {text: 'books'},
-					'1546969225': {text: 'movies'}
-				}
+				user: {},
+				activities: {},
+				categories: {}
 			}
 		},
-		methods:{
-			toogleTextDisplay(){
-            this.isTestDisplayed = !this.isTestDisplayed
+		beforeCreate(){
+			console.log('hallo before create app')
+		},
+		created(){
+			this.activities = fetchActivities
+			this.user = fetchUser
+			this.categories = fetchCategories
+		},
+		beforeMount(){
+			console.log('before mounted')
+		},
+		mounted(){
+			console.log('mounted')
+		},
+		beforeUpdate(){
+			console.log('before update')
+		},
+		updated(){
+			console.log('updated')
+		},
+		beforeDestroy(){
+			console.log('before destroy')
+		},
+		destroyed(){
+			console.log('destroyed')
+		}, 
+		computed:{
+			fullAppName(){
+				return this.appName + ' by ' +this.creator
 			},
+			activityLength(){
+				return Object.keys(this.activities).length
+			},
+			activityMotivation(){
+				if (this.activityLength < 5) return 'Nice to see some goals'
+				else if (this.activityLength >= 5) return 'So many activities, Good job'
+				else return 'No activities its so sad :('
+			}
+		},
+		
+		/*watch:{
+			creator(val) return this.appName + ' by ' + val
+			appName(val)return val + ' by ' +this.creator		
+			
+		},*/
+		methods:{
+			
 			displayForm(){
 				this.isFormDisplayed = !this.isFormDisplayed
 			},
 			createActivity(){
 				console.log(this.newActivity)
+			},
+			isFormValid(){
+				return this.newActivity.title && this.newActivity.notes
 			}
 		}
 	}
@@ -144,6 +187,13 @@
 }
 footer {
     background-color: #F2F6FA !important;
+}
+
+.activity-length{
+	display: inline-block
+}
+.activity-motivation{
+	float: right
 }
 
 .example-wrapper{

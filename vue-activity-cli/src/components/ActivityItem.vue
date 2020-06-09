@@ -23,7 +23,12 @@
 
 <script>
     export default {
-        props: ['activity']
+        //props: ['activity']
+        props: {
+            activity:{
+                type: Object, required: true
+            }
+        }
     }
 </script>
 
